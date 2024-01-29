@@ -14,21 +14,16 @@ const container = document.getElementById('root')
 const scene = new Scene()
 const renderer = new Renderer(scene, container)
 const camera = new Camera(renderer.threeRenderer)
-const geometry = new BoxGeometry(1, 1, 1)
+const geometry = new BoxGeometry(100, 100, 100)
 const material = new MeshBasicMaterial()
-for (let i = 0; i < 8; i++) {
-    for (let j = 0; j < 8; j++) {
-        const box = new Mesh(geometry, material)
-        scene.add(box)
-    }
-}
+const box = new Mesh(geometry, material)
 const GameObject = {
 
     render() {
 
         console.log("render")
         renderer.render(scene, camera.threeCamera);//
-
+        scene.add(box)
         requestAnimationFrame(GameObject.render);
 
     }
