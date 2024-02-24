@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 
 <head>
-    <title>Adam Cinal 4ic</title>
-    <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js"></script>
-  <script type="module" crossorigin src="/assets/index-iylqfxuy.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <script type="module" crossorigin src="/assets/index-st5W-py-.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-KZ0SD1sv.css">
 </head>
 
 <body>
-    <div id="root"></div>
-    <div id="loginPanel">
-        <form>
-            <h1>CHECKERS</h1>
-            <input type="text" name="username" id="username">
-            <button id="loginBt">loguj</button>
-            <button id="resetBt">reset</button>
-        </form>
+    <nav id="nav">Status</nav>
+    <div id="wait">
+        Oczekiwanie na drugiego gracza...
+    </div>
+    <div id="root">
+
+    </div>
+    <div id="loginOverlay" class="overlay">
+        <div id="loginPanel">
+            <form>
+                <h1>CHECKERS</h1>
+                <input type="text" name="username" id="username" placeholder="Username...">
+                <button type="button" id="loginBt">Loguj</button>
+                <button type="button" id="resetBt">Reset</button>
+            </form>
+        </div>
     </div>
 </body>
 

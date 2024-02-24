@@ -1,29 +1,69 @@
-const express = require("express")
-const app = express()
-const PORT = 3000;
+const express = require('express');
+const app = express();
 const http = require('http');
+const PORT = 3000
+
 const server = http.createServer(app);
+
 const { Server } = require("socket.io");
 const socketio = new Server(server);
-app.use(express.static("dist"));
-let users = [];
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-});
-// app.listen(PORT, function () {
-//     console.log("start serwera na porcie " + PORT)
-// })
-server.listen(3000, () => {
-    console.log('start na porcie 3000');
-});
+
 socketio.on('connection', (client) => {
-    console.log("klient się podłączył z id = ", client.id)
+    console.log("klient się podłączył z id =", client.id);
+
+    client.on("userLogin", (data) => {
+        console.log(`Użytkownik ${data.playerName} zalogowany jako gracz ${data.playerNumber}`);
+    });
+
     client.emit("onconnect", {
         clientId: client.id
-    })
+    });
+
     client.on("disconnect", (reason) => {
-        console.log("klient się rozłącza", reason)
-    })
-    // client.id - unikalna nazwa klienta generowana przez socket.io
+        console.log("klient się rozłącza", reason);
+    });
 });
-//install vite and express and three js
+
+app.use(express.static("dist"))
+
+const users = []; 
+
+let pawns = [
+    [0, 2, 0, 2, 0, 2, 0, 2],
+    [2, 0, 2, 0, 2, 0, 2, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0]
+];
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + "index.html");
+    res.json({ pawns })
+});
+
+app.post('/login', express.json(), (req, res) => {
+    const { username } = req.body;
+    console.log(req.body)
+    console.log(users.length);
+    if (users.length == 1) {
+        users.push(username);
+        res.json({ success: true, message: "Witaj " + username + " , grasz bialymi", pawns, player: users.length });
+    } else if (users.length == 0) {
+        users.push(username);
+        res.json({ success: true, message: "Witaj " + username + " , grasz czarnymi", pawns, player: users.length });
+    } else {
+        res.json({ success: false, message: "Witaj " + username + ", juz jest dwoch graczy" });
+    }
+
+});
+
+app.get("/wait", (req, res) => {
+    res.json({ users: users.length });
+});
+
+server.listen(PORT, function () {
+    console.log("start serwera na porcie " + PORT)
+})

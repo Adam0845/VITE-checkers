@@ -1,19 +1,9 @@
-import { allEvents } from "./src/modules/Ui.js"
-import { GameObject } from "./src/modules/Main.js"
-import './src/css/style.css';
-GameObject.render()
-allEvents.init()
-const client = io()
-window.onload = function () {
+// import { allEvents } from "./modules/js/Ui.js"
+import { GameObject } from "./src/modules/js/Main.js";
+import { Net } from "./src/modules/js/Net.js";
+import { allEvents } from "./src/modules/js/Ui.js";
 
-    client.on("onconnect", (data) => {
-        console.log(data.clientId)
-    })
+// Inicjalizacja gry
+GameObject.render();
 
-}
-document.addEventListener("mousemove", (e) => {
-    client.emit("mouseposition", {
-        posX: e.clientX,
-        posY: e.clientY
-    })
-});
+allEvents.init();
