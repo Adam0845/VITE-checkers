@@ -11,7 +11,7 @@ const scene = new Scene()
 const renderer = new Renderer(scene, container)
 
 
-const pionki = [
+const pawns = [
     [0, 2, 0, 2, 0, 2, 0, 2],
     [2, 0, 2, 0, 2, 0, 2, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -45,13 +45,13 @@ const GameObject = {
             renderer.render(scene, camera.threeCamera);
             requestAnimationFrame(() => GameObject.render(player, pawns));
         } 
-        // if(player === undefined) {
-        //     console.log("x");
-        //     const camera = new Camera(renderer.threeRenderer, 1); 
-        //     OnlyField.render(scene, pawns);
-        //     renderer.render(scene, camera.threeCamera);
-        //     requestAnimationFrame(() => GameObject.render(player, pawns));
-        // }
+        if (player === undefined && pawns !== undefined && pawns.length > 0) {
+            console.log('to sa', pawns);
+            const camera = new Camera(renderer.threeRenderer, 1); 
+            OnlyField.render(scene, pawns);
+            renderer.render(scene, camera.threeCamera);
+            requestAnimationFrame(() => GameObject.render(player, pawns));
+        }
     }
 };
 export { GameObject }

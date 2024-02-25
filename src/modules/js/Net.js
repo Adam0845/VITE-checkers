@@ -44,6 +44,28 @@ const Net = {
             console.error("Error during login:", error);
         }
     },
+    async getPawns() {
+        try {
+            const response = await fetch("/pawns", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({}) 
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log("Pawns:", data.pawns);
+            GameObject.render(data.player, data.pawns); 
+        } catch (error) {
+            console.error("Error during getting pawns:", error);
+        }
+    }
 };
+    
+
+
 
 export { Net };

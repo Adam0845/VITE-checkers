@@ -4,6 +4,7 @@ const wait = document.getElementById("wait")
 
 const allEvents = {
     init() {
+        Net.getPawns()
         document.getElementById('loginOverlay').style.display = 'flex';
         document.getElementById('loginBt').addEventListener('click', () => {
             const username = document.getElementById('username').value;
@@ -23,7 +24,7 @@ const allEvents = {
                 })
                 .catch(error => console.error('Błąd logowania:', error));
         });
-
+        
     }
 }
 

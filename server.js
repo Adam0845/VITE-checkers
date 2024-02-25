@@ -41,9 +41,11 @@ let pawns = [
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "index.html");
-    res.json({ pawns })
+   
 });
-
+app.post('/pawns', (req, res) => {
+    res.json({ pawns: pawns, player: undefined });
+});
 app.post('/login', express.json(), (req, res) => {
     const { username } = req.body;
     console.log(req.body)
