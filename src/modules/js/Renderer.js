@@ -24,16 +24,7 @@ export default class Renderer {
     updateSize() {
         this.threeRenderer.setSize(window.innerWidth, window.innerHeight);
     }
-    addListener(scene, camera, player) {
-        this.event++;
-        window.addEventListener('pointermove', (event) => {
-            this.pointer.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-            this.pointer.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
-            this.raycaster.setFromCamera(this.pointer, camera);
-            console.log('x');
-            let intersects = this.raycaster.intersectObjects(scene.children)
-        });
-    }
+    
     render(scene, camera) {
         this.threeRenderer.render(scene, camera);
     }
