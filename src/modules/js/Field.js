@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 export default class Field {
     constructor(scene, x, y, z, texture) {
-        console.log("field")
-        console.log(texture)
+        //console.log("field")
+        //console.log(texture)
         this.scene = scene;
         this.geometry = new THREE.PlaneGeometry(50, 50);
         // this.material = new THREE.TextureLoader().load('/gfx/wood.png')

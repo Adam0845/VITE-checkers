@@ -11,7 +11,9 @@ client.on("onconnect", (data) => {
 const nav = document.getElementById("nav")
 
 const Net = {
+  
     async loginUser(userName) {
+        
         try {
             const response = await fetch("/login", {
                 method: "POST",
@@ -27,12 +29,12 @@ const Net = {
 
             const data = await response.json();
 
-            console.log(data.success)
+            //console.log(data.success)
             if (data.success) {
-
-                console.log(data.message, "player: ", data.player);
+               
+                //console.log(data.message, "player: ", data.player);
                 nav.innerHTML = data.message;
-                console.log(data.pawns)
+                //console.log(data.pawns)
                 GameObject.render(data.player, data.pawns);
 
             } else {
@@ -57,7 +59,6 @@ const Net = {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            console.log("Pawns:", data.pawns);
             GameObject.render(data.player, data.pawns); 
         } catch (error) {
             console.error("Error during getting pawns:", error);

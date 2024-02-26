@@ -8,7 +8,7 @@ import { Game, OnlyField } from './Ico';
 
 const container = document.getElementById('root')
 const scene = new Scene()
-const renderer = new Renderer(scene, container)
+const renderer = new Renderer(scene, container);
 
 
 const pawns = [
@@ -38,18 +38,18 @@ const GameObject = {
     render(player, pawns) {
 
         if (player !== undefined) {
-            console.log(player);
+            //console.log(player);
             const camera = new Camera(renderer.threeRenderer, player);
-            console.log("render");
+            //console.log("render");
             Game.render(scene, pawns);
-            renderer.render(scene, camera.threeCamera);
+            renderer.render(scene, camera.threeCamera,player);
             requestAnimationFrame(() => GameObject.render(player, pawns));
         } 
         if (player === undefined && pawns !== undefined && pawns.length > 0) {
-            console.log('to sa', pawns);
+            //console.log('to sa', pawns);
             const camera = new Camera(renderer.threeRenderer, 1); 
             OnlyField.render(scene, pawns);
-            renderer.render(scene, camera.threeCamera);
+            renderer.render(scene, camera.threeCamera,player);
             requestAnimationFrame(() => GameObject.render(player, pawns));
         }
     }

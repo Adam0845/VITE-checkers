@@ -11,9 +11,13 @@ const whiteFieldTexture = textureLoader.load(whitefield);
 const blackFieldTexture = textureLoader.load(blackfield);
 const blackPawnTexture = textureLoader.load(blackpawn);
 const whitePawnTexture = textureLoader.load(whitepawn);
-
+let GameMade = false;
+let fieldMade = false;
 const Game = {
     render(scene, pawns) {
+        if(!GameMade) {
+
+        
         const player1 = 1;
         const player2 = 2;
         const fieldSize = 50;
@@ -44,10 +48,17 @@ const Game = {
             }
         }
     }
+    GameMade = true;
+}
 };
 
 const OnlyField = {
+   
     render(scene, pawns) {
+        if(!fieldMade)
+        {
+            
+        
         const fieldSize = 50;
         const startX = -((pawns[0].length - 1) * 0.5) * fieldSize;
         const startZ = -((pawns.length - 1) * 0.5) * fieldSize;
@@ -64,6 +75,8 @@ const OnlyField = {
                     new Field(scene, x, y, z, blackFieldTexture);
                 }
             }
+        }
+        fieldMade = true;
         }
     }
 };
