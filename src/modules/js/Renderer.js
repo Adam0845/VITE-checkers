@@ -22,9 +22,10 @@ export default class Renderer {
         window.addEventListener('resize', () => this.updateSize(), false);
         
     }
-    onMouseDown(scene, camera) {
+    onMouseDown(scene, camera, player) {
         window.addEventListener('mousedown', (event) => {
             this.e++;
+            console.log(player)
             this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
             this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
             this.raycaster.setFromCamera(this.pointer, camera);
@@ -36,10 +37,18 @@ export default class Renderer {
             {
                const object = intersects[0].object;
                if (object.geometry instanceof THREE.CylinderGeometry) {
-                object.material = new THREE.MeshBasicMaterial({
-                    color: 0xffff00,
-                    map: object.material.map 
-                });
+                if(player===2)
+                {
+                    console.log('objectname to: ' + object.name)
+                    if(object.name==='whitepawn')
+                    {
+                        object.material = new THREE.MeshBasicMaterial({
+                            color: 0xffff00,
+                            map: object.material.map 
+                        });
+                    }
+                }
+               
                 console.log('To jest pion!');
                 console.log(object.material)
                 }
@@ -58,7 +67,7 @@ export default class Renderer {
     render(scene, camera, player) {
             if(player===2)
             {
-                this.onMouseDown(scene, camera);
+                this.onMouseDown(scene, camera, player);
                 this.threeRenderer.render(scene, camera);
             }
             else

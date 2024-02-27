@@ -39,9 +39,11 @@ const Game = {
                     if (pawnValue === 1 || pawnValue === 2) {
                         const whichplayer = (pawnValue === 1) ? player1 : player2;
                         const pawnTexture = (pawnValue === 1) ? blackPawnTexture : whitePawnTexture;
+                        const whichpawn =  (pawnValue === 1) ? 'blackpawn': 'whitepawn' ;
+                        console.log(whichpawn)
                         const pawnX = x;
                         const pawnZ = z;
-                        const pawn = new Pawn(scene, pawnX, y, pawnZ, pawnTexture, whichplayer);
+                        const pawn = new Pawn(scene, pawnX, y, pawnZ, pawnTexture, whichplayer, whichpawn);
                         scene.add(pawn.mesh);
                     }
                 }
