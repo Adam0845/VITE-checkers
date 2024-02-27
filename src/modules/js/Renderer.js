@@ -16,21 +16,21 @@ export default class Renderer {
         this.e = 0;
         this.numberofclicked = 0;
         this.actualitem;
-        this.lastclicked; 
        
         document.addEventListener('DOMContentLoaded', () => this.updateSize(), false);
         window.addEventListener('resize', () => this.updateSize(), false);
         
     }
     onMouseDown(scene, camera, player) {
+        let lastclicked;
         window.addEventListener('mousedown', (event) => {
             this.e++;
-            console.log(player)
+            //console.log(player)
             this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
             this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
             this.raycaster.setFromCamera(this.pointer, camera);
             const intersects = this.raycaster.intersectObjects(this.scene.children, true);
-            this.render(scene, camera)
+            //this.render(scene, camera)
             // console.log(intersects);
             // console.log(this.pointer);
             if(intersects.length > 0)
@@ -39,18 +39,42 @@ export default class Renderer {
                if (object.geometry instanceof THREE.CylinderGeometry) {
                 if(player===2)
                 {
-                    console.log('objectname to: ' + object.name)
                     if(object.name==='whitepawn')
                     {
                         object.material = new THREE.MeshBasicMaterial({
                             color: 0xffff00,
                             map: object.material.map 
                         });
+                        if(lastclicked)
+                        {
+                            lastclicked.material = new THREE.MeshBasicMaterial({
+                                color: 0xffffff,
+                                map: lastclicked.material.map 
+                            });
+                        }
+                        
                     }
                 }
-               
-                console.log('To jest pion!');
-                console.log(object.material)
+                if(player===1)
+                {
+                    if(object.name==='blackpawn')
+                    {
+                        object.material = new THREE.MeshBasicMaterial({
+                            color: 0xffff00,
+                            map: object.material.map 
+                        });
+                        if(lastclicked)
+                        {
+                            lastclicked.material = new THREE.MeshBasicMaterial({
+                                color: 0xffffff,
+                                map: lastclicked.material.map 
+                            });
+                        }
+                    }
+
+                }
+                lastclicked = object;
+                //console.log(object.material)
                 }
             //    console.log(intersects[0].object);
             //    console.log(this.scene.children[1])
@@ -65,7 +89,7 @@ export default class Renderer {
     }
     
     render(scene, camera, player) {
-            if(player===2)
+            if(allEvents.users === 2)
             {
                 this.onMouseDown(scene, camera, player);
                 this.threeRenderer.render(scene, camera);

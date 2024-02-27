@@ -15,7 +15,7 @@ const allEvents = {
                     let inter = setInterval(async () => {
                         let res = await fetch("http://localhost:3000/wait");
                         let { users } = await res.json();
-
+                        allEvents.users = users;
                         if (users == 2) {
                             clearInterval(inter);
                             wait.style.display = 'none';
