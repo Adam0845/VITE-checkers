@@ -35,7 +35,7 @@ export default class Renderer {
             // console.log(this.pointer);
             if(intersects.length > 0)
             {
-               const object = intersects[0].object;
+               let object = intersects[0].object;
                if (object.geometry instanceof THREE.CylinderGeometry) {
                 if(player===2)
                 {
@@ -71,14 +71,54 @@ export default class Renderer {
                             });
                         }
                     }
+                   
 
                 }
                 lastclicked = object;
-                //console.log(object.material)
-                }
-            //    console.log(intersects[0].object);
-            //    console.log(this.scene.children[1])
             }
+            if(lastclicked)
+            {
+            if(object.geometry instanceof THREE.PlaneGeometry && lastclicked.geometry instanceof THREE.CylinderGeometry && object.name === 'blackfield' && object.position.x !== lastclicked.position.x && object.position.z !== lastclicked.position.z)
+            {
+            if((Math.abs(object.position.x - lastclicked.position.x) === 50) || (Math.abs(lastclicked.position.x - object.position.x) === 50))
+            {
+                
+                if(player===1 && lastclicked.name === 'blackpawn' && object.position.z < lastclicked.position.z )
+                {
+                    console.log('pozwolenie na przeniesienie LETS GO!!!')
+                    lastclicked.position.copy(object.position);
+                    console.log(object.position)
+                    lastclicked.position.y = 10;
+                    lastclicked.material = new THREE.MeshBasicMaterial({
+                        color: 0xffffff,
+                        map: lastclicked.material.map 
+                    });
+                    lastclicked = null; 
+                    
+                }
+                if(player===2 && lastclicked.name === 'whitepawn' && object.position.z > lastclicked.position.z)
+                {
+                    
+                    console.log('pozwolenie na przeniesienie LETS GO!!!')
+                    lastclicked.position.copy(object.position);
+                    console.log(object.position)
+                    lastclicked.position.y = 10;
+                    lastclicked.material = new THREE.MeshBasicMaterial({
+                        color: 0xffffff,
+                        map: lastclicked.material.map 
+                    });
+                    lastclicked = null;
+                }
+                else {
+                    console.log('Odmowa przeniesienia!!!')
+                   
+                    object = null;
+                    
+                }
+            }
+        }
+            }
+        }
         })
         
     }

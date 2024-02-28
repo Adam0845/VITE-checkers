@@ -31,9 +31,9 @@ const Game = {
                 const z = startZ + i * fieldSize;
 
                 if ((i + j) % 2 === 0) {
-                    new Field(scene, x, y, z, whiteFieldTexture);
+                    new Field(scene, x, y, z, whiteFieldTexture, 'whitefield');
                 } else {
-                    new Field(scene, x, y, z, blackFieldTexture);
+                    new Field(scene, x, y, z, blackFieldTexture, 'blackfield');
 
                     const pawnValue = pawns[i][j];
                     if (pawnValue === 1 || pawnValue === 2) {
@@ -72,9 +72,9 @@ const OnlyField = {
                 const z = startZ + i * fieldSize;
 
                 if ((i + j) % 2 === 0) {
-                    new Field(scene, x, y, z, whiteFieldTexture);
+                    new Field(scene, x, y, z, whiteFieldTexture, 'whitefield');
                 } else {
-                    new Field(scene, x, y, z, blackFieldTexture);
+                    new Field(scene, x, y, z, blackFieldTexture, 'blackfield');
                 }
             }
         }

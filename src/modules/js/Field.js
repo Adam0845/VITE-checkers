@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export default class Field {
-    constructor(scene, x, y, z, texture) {
+    constructor(scene, x, y, z, texture, name) {
         //console.log("field")
         //console.log(texture)
         this.scene = scene;
@@ -9,6 +9,7 @@ export default class Field {
         this.material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.set(x, y, z);
+        this.mesh.name = name;
         this.scene.add(this.mesh)
 
         this.mesh.rotation.x = Math.PI / 2
